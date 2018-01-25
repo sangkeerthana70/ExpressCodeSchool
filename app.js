@@ -1,6 +1,8 @@
 var express = require("express");//require the express library
 var app = express();//application instance
 
+/* The following code is for Level1 class assignment
+
 app.get('/', function(request, response) {//on the app object we create a function that calls routes.
 //the get function creates a route that accepts a http get request  
     response.send("Hello World!");
@@ -24,5 +26,18 @@ app.get('/currentDate', function(request, response) {
 });
 
 app.listen(process.env.PORT, function() {
-    console.log("listening on Port 3000");
+    console.log("listening on Port.....");
+});*/
+
+//Level-2 class assignment.
+app.use(express.static('public')); 
+
+app.get('/cities', function(req, res){
+  var cities = ['New York', 'London', 'Paris', 'Tokyo'];
+  res.send(cities);
 });
+
+app.listen(process.env.PORT, function() {
+    console.log("listening on Port....");
+})
+
