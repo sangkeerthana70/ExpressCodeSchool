@@ -70,6 +70,8 @@ app.get('/cities', function(request, response){
      'Seattle': 'Washington'
      };
      
+
+     
  app.get('/cities/:city', function(request, response) {
      var city = request.params.city;
      var nCity = city[0].toUpperCase() + city.slice(1).toLowerCase();//normalizing data
