@@ -63,10 +63,10 @@ app.get('/cities', function(request, response){
 
 //Dynamic route
  var cities = {
-     'Los Angeles': 'California',
+     'Denver': 'Colorado',
      'Chicago': 'Illinois',
      'Boston': 'Massachusetts',
-     'New York City': 'New York',
+     'Phoenix': 'Arizona',
      'Seattle': 'Washington'
      };
      
@@ -74,7 +74,8 @@ app.get('/cities', function(request, response){
      var city = request.params.city;
      var nCity = city[0].toUpperCase() + city.slice(1).toLowerCase();//normalizing data
      console.log(nCity);
-     var returnState = cities[nCity];
+     var returnState = cities[nCity];//go to the cities property with the
+     //user input of nCity and get its value of state and return it
      if (!returnState) {
          response.status(404).json('No state found for ' + request.params.state);
      }
