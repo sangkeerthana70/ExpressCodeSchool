@@ -30,7 +30,7 @@ app.listen(process.env.PORT, function() {
 });*/
 
 //Level-2 class assignment.
-app.use(express.static('public')); 
+/*app.use(express.static('public')); 
 
 app.get('/cities', function(req, res){
   var cities = ['New York', 'London', 'Paris', 'Tokyo'];
@@ -39,5 +39,51 @@ app.get('/cities', function(req, res){
 
 app.listen(process.env.PORT, function() {
     console.log("listening on Port....");
-})
+})*/
+
+
+//Level3 Class Assignment
+app.use(express.static('public')); 
+
+//static route
+app.get('/cities', function(request, response){
+  var cities = ['Los Angeles', 'Chicago', 'Boston', 'New York City', 'Seattle'];
+  if ((request.query.limit > 0) & (request.query.limit <= cities.length)) {
+        response.json(cities.slice(0, request.query.limit));
+    }
+    else if(request.query.limit==0) {
+        response.send(cities);
+    } 
+    else {//greater than the array[length]
+        response.status(404).json('Only maximum of five cities supported');
+        //console.log("here");
+    }
+  
+});
+
+//Dynamic route
+ var cities = {
+     'Los Angeles': 'California',
+     'Chicago': 'Illinois',
+     'Boston': 'Massachusetts',
+     'New York City': 'New York',
+     'Seattle': 'Washington'
+     };
+     
+ app.get('/cities/:city', function(request, response) {
+     var city = request.params.city;
+     var nCity = city[0].toUpperCase() + city.slice(1).toLowerCase();//normalizing data
+     console.log(nCity);
+     var returnState = cities[nCity];
+     if (!returnState) {
+         response.status(404).json('No state found for ' + request.params.state);
+     }
+     else {
+     response.json(returnState);
+     }
+ });
+
+app.listen(process.env.PORT, function() {
+    console.log("listening on Port....");
+});
 
