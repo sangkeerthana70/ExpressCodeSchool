@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sangkeerthana70/ExpressCodeSchool#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2"
   }
 }
