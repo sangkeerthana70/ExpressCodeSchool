@@ -95,8 +95,6 @@ app.get('/cities', function(request, response){
 app.listen(process.env.PORT, function() {
     console.log("listening on Port....");
 });
-=======
->>>>>>> Level4
 
 /*Level3 Class Assignment
 app.use(express.static('public')); 
