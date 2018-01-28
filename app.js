@@ -29,8 +29,13 @@ app.listen(process.env.PORT, function() {
     console.log("listening on Port.....");
 });*/
 
+<<<<<<< HEAD
 //Level-2 class assignment.
 /*app.use(express.static('public')); 
+=======
+/*Level-2 class assignment.
+app.use(express.static('public')); 
+>>>>>>> Level4
 
 app.get('/cities', function(req, res){
   var cities = ['New York', 'London', 'Paris', 'Tokyo'];
@@ -40,6 +45,7 @@ app.get('/cities', function(req, res){
 app.listen(process.env.PORT, function() {
     console.log("listening on Port....");
 })*/
+<<<<<<< HEAD
 
 
 //Level3 Class Assignment
@@ -89,4 +95,116 @@ app.get('/cities', function(request, response){
 app.listen(process.env.PORT, function() {
     console.log("listening on Port....");
 });
+=======
+>>>>>>> Level4
 
+/*Level3 Class Assignment
+app.use(express.static('public')); 
+
+//static route
+app.get('/cities', function(request, response){
+  var cities = ['Los Angeles', 'Chicago', 'Boston', 'New York City', 'Seattle'];
+  if ((request.query.limit > 0) & (request.query.limit <= cities.length)) {
+        response.json(cities.slice(0, request.query.limit));
+    }
+    else if(request.query.limit==0) {
+        response.send(cities);
+    } 
+    else {//greater than the array[length]
+        response.status(404).json('Only maximum of five cities supported');
+        //console.log("here");
+    }
+  
+});
+
+//Dynamic route
+ var cities = {
+     'Los Angeles': 'California',
+     'Chicago': 'Illinois',
+     'Boston': 'Massachusetts',
+     'New York City': 'New York',
+     'Seattle': 'Washington'
+     };
+     
+ app.get('/cities/:city', function(request, response) {
+     var city = request.params.city;
+     var nCity = city[0].toUpperCase() + city.slice(1).toLowerCase();//normalizing data
+     console.log(nCity);
+     var returnState = cities[nCity];
+     if (!returnState) {
+         response.status(404).json('No state found for ' + request.params.state);
+     }
+     else {
+     response.json(returnState);
+     }
+ });
+
+app.listen(process.env.PORT, function() {
+    console.log("listening on Port....");
+});*/
+
+//Level4 Class Assignment
+
+var bodyParser = require('body-parser');
+var parseUrlencoded = bodyParser.urlencoded({extended: false});
+
+var cities = {
+     'Los Angeles': 'CA',
+     'Chicago': 'IL',
+     'Boston': 'MA',
+     'New York City': 'NY',
+     'Seattle': 'WA'
+     };
+
+app.use(express.static('public')); 
+
+//static route
+app.get('/cities', function(request, response){
+    
+  var limit = request.query.limit;
+  var cityList = Object.keys(cities);
+  if ((limit > 0) & (limit <= cityList.length)) {
+        response.json(cityList.slice(0, request.query.limit));
+    }
+    else if(limit==0) {
+        response.send(cityList);
+    } 
+    else {//greater than the array[length]
+        response.status(404).json('Only maximum of five cities supported');
+        //console.log("here");
+    }
+  
+});
+
+app.post('/addCity', parseUrlencoded, function(request, response) {//parseUrlencoded
+//is a handler that creates an element called body in the request object
+  var cityDetail = request.body;
+  var cityName =cityDetail.city;
+  var stateName = cityDetail.state;
+  var nState = stateName.toUpperCase();
+  var nCity = cityName[0].toUpperCase() + cityName.slice(1).toLowerCase()
+  cities[nCity] = nState;
+  response.status(201).json(nCity);
+});
+
+app.get('/cities/:city', function(request, response) {
+     var city = request.params.city;
+
+     var state = cities[city];
+     if (!state) {
+        response.status(404).json('No state found for ' + request.params.state);
+     }
+     else {
+        response.json(state);
+     }
+ });
+
+app.delete('/cities/:city',function(request,response){
+    var city = request.params.city;
+    //console.log(city);
+    delete cities[city];
+    response.sendStatus(200);
+});
+app.listen(process.env.PORT, function() {
+    console.log("listening on Port....");
+});
