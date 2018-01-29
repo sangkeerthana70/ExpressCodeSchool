@@ -120,14 +120,15 @@ app.get('/cities', function(request, response){
 });
 
 app.post('/addCity', parseUrlencoded, function(request, response) {//parseUrlencoded
-//is a handler that creates an element called body in the request object
-  var cityDetail = request.body;
+//is a handler that creates an element called body in the request object. Inside route we have 
+//the form data available to request.body object
+  var cityDetail = request.body;//returns the form data
   var cityName =cityDetail.city;
   var stateName = cityDetail.state;
   var nState = stateName.toUpperCase();
-  var nCity = cityName[0].toUpperCase() + cityName.slice(1).toLowerCase()
+  var nCity = cityName[0].toUpperCase() + cityName.slice(1).toLowerCase();
   cities[nCity] = nState;
-  response.status(201).json(nCity);
+  response.status(201).json(nCity);//responds with a new city name.
 });
 
 app.get('/cities/:city', function(request, response) {
