@@ -50,9 +50,8 @@ function appendCity(cities) {
    for (var i=0;i<cities.length;i++) {
     var list = document.createElement('Li');//create a List item
     var city = cities[i];
-//    list.innerHTML = '<a href = "/cities/' + cities[i] + '">'+cities[i]+'</a>' ;
-     list.innerHTML = '<a href="#" city-name="'+city+'"><img src="delete.jpg" height="15" width="22.5"></a>' +'<a href = "/cities/' + cities[i] + '">'+cities[i]+'</a>';
-
+    //list.innerHTML = '<a href = "/cities/' + cities[i] + '">'+cities[i]+'</a>' ;
+    list.innerHTML = '<a href="#" city-name="'+city+'"><img src="delete.jpg" height="15" width="22.5"></a>' +'<a href = "/cities/' + cities[i] + '">'+cities[i]+'</a>';
     $('#numberofCities').append(list);//append for each run
    }
 }
@@ -61,10 +60,10 @@ $('#cities').submit(function(event) {
     event.preventDefault();
     var cityCount = $('#NumberCities').val();
     //console.log(cityCount);
-     event.preventDefault();
-   $.get('/cities?limit=' + cityCount, function(cities) {//using route to make the AJAX call.
-       $("#numberofCities").empty();
-       appendCity(cities);
+    //event.preventDefault();
+    $.get('/cities?limit=' + cityCount, function(cities) {//using route to make the AJAX call.
+    $("#numberofCities").empty();
+    appendCity(cities);
      });  
 });
 
@@ -95,11 +94,9 @@ $('#add').submit(function(event) {
     //console.log(cityData);
     $.ajax({
        type:'POST',url:'/addCity',data:cityData
-    }).done(function(newCity){
-        var list = document.createElement('Li');//create a List item
-        list.innerHTML = newCity;//populate the Li
-       appendCity([newCity]);
-       form.trigger('reset');
+    }).done(function(newCity){//we get the recently created city name
+        appendCity([newCity]);//to display only the cities and not state get the key and make it an array.
+        form.trigger('reset');//to delete the input form in the field.
     });
 });
 
@@ -107,8 +104,8 @@ $('#numberofCities').on('click','a[city-name]',(function(event) {
     if (!confirm("Are you sure you want to delete?")){
         return false;
     }
-    var target = $(event.currentTarget);
-    console.log("city to be deleted is" + target.data('city-name'));
+    var target = $(this);//event.currentTarget
+    console.log("city to be deleted is" + target.parent('li').val());
     $.ajax({
         type:'DELETE',url:'/cities/'+target.data('city-name')
     }).done(function(){
