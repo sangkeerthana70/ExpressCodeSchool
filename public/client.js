@@ -39,10 +39,7 @@ $('#city').click(function(event) {
        }
      });  
 });
-<<<<<<< HEAD
 
-
-=======
 */
 // level 4
 
