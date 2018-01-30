@@ -1,9 +1,5 @@
 /*global $ */
-<<<<<<< HEAD
 /*Level2- Class Assignment
-=======
-/*Level2 Class assignment
->>>>>>> Level4
 $('#cities').submit(function(event) {
      event.preventDefault();
    $.get('/cities', function(cities) {//using route to make the AJAX call.
@@ -15,17 +11,11 @@ $('#cities').submit(function(event) {
        }
        
    });
-<<<<<<< HEAD
 });
 */
 
-//Level3 Class assignment.
-=======
-});*/
-
-//Level3 Class assignment.
 /*
->>>>>>> Level4
+//Level3 Class assignment.
 $('#city').click(function(event) {
     var cityCount = $('#NumberCities').val();
     console.log(cityCount);
@@ -90,7 +80,7 @@ $('#add').submit(function(event) {
     var cityData = form.serialize();//generates key value pair from the form input
     //console.log(cityData);
     $.ajax({
-       type:'POST',url:'/addCity',data:cityData
+       type:'POST',url:'/cities',data:cityData
     }).done(function(newCity){//we get the recently created city name
         appendCity([newCity]);//to display only the cities and not state get the key and make it an array.
         form.trigger('reset');//to delete the input form in the field.
@@ -110,4 +100,3 @@ $('#numberofCities').on('click','a[city-name]',(function(event) {
     });
 })
 );
->>>>>>> Level4

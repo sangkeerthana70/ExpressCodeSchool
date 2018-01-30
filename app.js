@@ -29,13 +29,10 @@ app.listen(process.env.PORT, function() {
     console.log("listening on Port.....");
 });*/
 
-<<<<<<< HEAD
 //Level-2 class assignment.
 /*app.use(express.static('public')); 
-=======
 /*Level-2 class assignment.
 app.use(express.static('public')); 
->>>>>>> Level4
 
 app.get('/cities', function(req, res){
   var cities = ['New York', 'London', 'Paris', 'Tokyo'];
@@ -45,9 +42,9 @@ app.get('/cities', function(req, res){
 app.listen(process.env.PORT, function() {
     console.log("listening on Port....");
 })*/
-<<<<<<< HEAD
 
 
+/*
 //Level3 Class Assignment
 app.use(express.static('public')); 
 
@@ -141,7 +138,7 @@ app.listen(process.env.PORT, function() {
     console.log("listening on Port....");
 });*/
 
-
+/*
 //Level4 Class Assignment
 
 var bodyParser = require('body-parser');
@@ -175,7 +172,7 @@ app.get('/cities', function(request, response){
   
 });
 
-app.post('/addCity', parseUrlencoded, function(request, response) {//parseUrlencoded
+app.post('/cities', parseUrlencoded, function(request, response) {//parseUrlencoded
 //is a handler that creates an element called body in the request object. Inside route we have 
 //the form data available to request.body object
   var cityDetail = request.body;//returns the form data
@@ -207,6 +204,17 @@ app.delete('/cities/:city',function(request,response){
 });
 app.listen(process.env.PORT, function() {
     console.log("listening on Port....");
-});
+});*/
 
 //Level5 
+app.use(express.static('public')); 
+var cities = require('./routes/cities');
+app.use('/cities', cities);
+
+app.listen(process.env.PORT, function() {
+    console.log("listening on Port....");
+});
+
+
+
+
