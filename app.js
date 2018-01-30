@@ -113,7 +113,7 @@ app.get('/cities', function(request, response){
         response.send(cityList);
     } 
     else {//greater than the array[length]
-        response.status(404).json('Only maximum of five cities supported');
+        response.status(404).json("Only maximum of " + cityList.length + " is supported");
         //console.log("here");
     }
   
